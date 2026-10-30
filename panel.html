@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>X Guard</title><link rel="stylesheet" href="panel.css"></head>
+<body>
+<svg class="icon-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+<symbol id="pin" viewBox="0 0 24 24"><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2"/></symbol>
+<symbol id="phone" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M10 18h4"/></symbol>
+<symbol id="people" viewBox="0 0 24 24"><circle cx="9" cy="6" r="3"/><path d="M3 21v-4a6 6 0 0 1 12 0v4H3ZM17 3a3 3 0 0 1 0 6m1 4a5 5 0 0 1 4 5v3h-4"/></symbol>
+<symbol id="chat" viewBox="0 0 24 24"><path d="M21 11a9 9 0 0 1-9 9H7l-5 3 1-7a9 9 0 1 1 18-5Z"/><path d="M7 11h.1m5 0h.1m5 0h.1"/></symbol>
+<symbol id="list" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="19" rx="2"/><path d="M9 3V1h6v2M9 8h6m-6 5h6m-6 5h6"/></symbol>
+<symbol id="download" viewBox="0 0 24 24"><path d="M12 2v13m-5-5 5 5 5-5M3 16v6h18v-6"/></symbol>
+</defs></svg>
+<header class="masthead"><h1>X Guard</h1><svg class="orbit" viewBox="0 0 100 80" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width=".7"><ellipse cx="46" cy="39" rx="39" ry="14" transform="rotate(-53 46 39)"/><ellipse cx="46" cy="39" rx="39" ry="13" transform="rotate(32 46 39)"/><path d="M8 72C62 48 28 13 94 56"/></g><circle cx="81" cy="24" r="4" fill="#b96646"/></svg></header>
+<main>
+<section class="status-card" aria-label="运行状态">
+<div class="status-line"><span id="status" class="status-pill"><i></i><span id="statusText">已暂停</span></span><span id="account">尚未连接</span></div>
+<div class="metrics"><div class="hero-number"><div><strong id="confirmed">0</strong><span class="target"> / <span id="target">1,000</span></span></div><span class="metric-label" id="confirmedLabel">已屏蔽</span></div><div class="small-metrics"><div><span>已核验</span><b id="checked">0</b></div><div><span>等待</span><b id="queued">0</b></div><div><span>已发现</span><b id="seen">0</b></div></div></div>
+<div class="progress-row"><progress id="progress" value="0" max="1000" aria-label="屏蔽目标进度"></progress><span id="percentage">0%</span></div>
+<p id="detail" class="detail">打开 X 页面后启动检查。</p>
+<div class="actions"><button id="start" class="primary">启动自动检查</button><button id="stop" class="outline">立即暂停</button></div>
+</section>
+<section class="rules" aria-labelledby="rulesTitle"><h2 id="rulesTitle">筛选规则</h2>
+<div class="criteria-grid" role="group" aria-label="参与筛选的条件">
+<button type="button" class="criterion" data-criterion="location" aria-pressed="false"><svg><use href="#pin"/></svg><span>香港 / 日本地区</span></button>
+<button type="button" class="criterion" data-criterion="client" aria-pressed="false"><svg><use href="#phone"/></svg><span>China Android App</span></button>
+<button type="button" class="criterion" data-criterion="followers" aria-pressed="false"><svg><use href="#people"/></svg><span>粉丝少于 10</span></button>
+<button type="button" class="criterion" data-criterion="abuse" aria-pressed="false"><svg><use href="#chat"/></svg><span>反复明确辱骂</span></button>
+</div><p id="ruleHint" class="hint">已选条件中命中两项，即执行屏蔽。</p>
+<label for="action">命中后的动作</label><div class="select-wrap"><select id="action"><option value="record">只记录证据</option><option value="hide">折叠该账号的回复</option><option value="block">自动屏蔽账号</option></select><span aria-hidden="true">⌄</span></div>
+</section>
+<nav class="footer-nav" aria-label="辅助功能"><button id="showAllowlist"><svg><use href="#people"/></svg>白名单</button><button id="showRecords"><svg><use href="#list"/></svg>核验记录</button><button id="export"><svg><use href="#download"/></svg>导出记录</button></nav>
+<p id="notice" role="status" aria-live="polite" hidden></p>
+<section id="allowlistSection" class="drawer" hidden><div class="section-top"><h2>白名单</h2><button class="close-drawer" aria-label="关闭白名单">×</button></div><label for="allowlist">用户名，以空格或换行分隔</label><textarea id="allowlist" rows="3" placeholder="username1 username2"></textarea><button id="saveAllowlist" class="primary">保存白名单</button></section>
+<section id="recordsSection" class="drawer" hidden><div class="section-top"><h2>核验记录</h2><button class="close-drawer" aria-label="关闭核验记录">×</button></div><div id="records">暂无记录。</div></section>
+<details class="advanced"><summary>更多选项</summary><label for="handle">手动加入核验队列</label><div class="input-row"><input id="handle" placeholder="用户名，不含 @"><button id="inspect" class="outline">加入</button></div><button id="reload" class="text-button">加载程序更新</button></details>
+</main><script src="core.js"></script><script src="panel.js"></script>
+</body></html>

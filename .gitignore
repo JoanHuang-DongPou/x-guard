@@ -1,0 +1,8 @@
+node_modules/
+dist/
+*.zip
+*-audit.json
+MANUAL-ACTIONS.md
+VALIDATION.md
+DESIGN.md
+*.log
